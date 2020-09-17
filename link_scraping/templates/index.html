@@ -46,18 +46,18 @@
           </div>
           
           <div id="parentlink{{parentlink.pk}}" class="card-collapse collapse">
-            <div class="accordion px-4" id="accordion">
+            <div class="accordion px-5" id="accordion">
               {% for childlink in childlinks %}
-                {% if childlink.parent_link == parentlink.pk %}
-                  <h5 class="card-title m-0">
+                {% if childlink.parent_link_id == parentlink.pk %}
+                  <h5 class="card-title mt-2">
                     <a data-toggle="collapse" data-parent="#accordion" href="#childlink{{childlink.pk}}">{{childlink.url}}</a>
                   </h5>
                 {% endif %}
               
                 <div id="childlink{{childlink.pk}}" class="card-collapse collapse">
                   {% for grandchildlink in grandchildlinks %}
-                    {% if grandchildlink.parent_link == childlink.pk %}
-                      <h6 class="ml-4">{{grandchildlink.url}}}}</h6>
+                    {% if grandchildlink.parent_link_id == childlink.pk %}
+                      <h6 class="ml-4">{{grandchildlink.url}}</h6>
                     {% endif %}
                   {% endfor %}
                 </div>

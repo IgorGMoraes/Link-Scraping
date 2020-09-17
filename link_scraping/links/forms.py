@@ -10,6 +10,7 @@ class LinkForm(forms.ModelForm):
         widgets = {
             'url': forms.TextInput(attrs = {'class': 'form-control mr-2 w-50', 'placeholder': 'URL'})
         }
+        
     def clean_url(self, *args, **kwargs):
         url = self.cleaned_data.get('url')
         
