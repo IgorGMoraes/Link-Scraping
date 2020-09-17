@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('link_title', models.CharField(max_length=200)),
-                ('original_url', models.CharField(max_length=200)),
+                ('url', models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
