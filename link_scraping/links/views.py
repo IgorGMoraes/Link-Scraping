@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 
 from .forms import LinkForm
@@ -16,15 +15,13 @@ def home(request):
             if ParentLink.objects.filter(url=form.cleaned_data['url']).exists():
                 messages.warning(request, 'This URL had already been registered')
             else:
-                parentlink_instance = form.save(commit=False)
-                print(parentlink_instance.id)
+                parentlink = form.save(commit=False)
+                print(parentlink.url)
                 form.save()
-                return HttpResponseRedirect('/')
-
+                return redirect('/')
         else:
-            print('error')
             messages.warning(request,'Please, provide a valid URL')
-            return HttpResponseRedirect('/')
+            return redirect('/')
     
     context = {
         'form': form,
