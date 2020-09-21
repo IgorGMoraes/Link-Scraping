@@ -21,8 +21,8 @@ def find_and_save_links(parent_link = ParentLink):
                 hrefs[i] = re.sub('//', '/', (url+href)[::-1], 1)[::-1]
             if href.startswith('../'):
                 hrefs[i] = re.sub('\/?.*?\/', '', url[::-1])[::-1]+re.sub('^(..)', '', href)
-        return hrefs
 
+        return hrefs
 
     def save_child_links(parent_link):
         parent_link.save()
@@ -33,3 +33,4 @@ def find_and_save_links(parent_link = ParentLink):
         browser.quit()
 
     save_child_links(parent_link)
+    browser.quit()

@@ -37,27 +37,27 @@
   <div class="container">
 
     <div class="accordion" id="accordion">
-      {% for parentlink in parentlinks %}
+      {% for parent_link in parent_links %}
         <div class="card border-bottom rounded my-2">
           <div class="card-header">
             <h5 class="card-title m-0">
-              <a data-toggle="collapse" data-parent="#accordion" href="#parentlink{{parentlink.pk}}">{{parentlink.url}}</a>
+              <a data-toggle="collapse" data-parent="#accordion" href="#parent_link{{parent_link.pk}}">{{parent_link.url}}</a>
             </h5>
           </div>
           
-          <div id="parentlink{{parentlink.pk}}" class="card-collapse collapse">
+          <div id="parent_link{{parent_link.pk}}" class="card-collapse collapse">
             <div class="accordion px-5" id="accordion">
-              {% for childlink in childlinks %}
-                {% if childlink.parent_link_id == parentlink.pk %}
+              {% for child_link in child_links %}
+                {% if child_link.parent_link_id == parent_link.pk %}
                   <h5 class="card-title mt-2">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#childlink{{childlink.pk}}">{{childlink.url}}</a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#child_link{{child_link.pk}}">{{child_link.url}}</a>
                   </h5>
                 {% endif %}
               
-                <div id="childlink{{childlink.pk}}" class="card-collapse collapse mb-2">
-                  {% for grandchildlink in grandchildlinks %}
-                    {% if grandchildlink.child_link_id == childlink.pk %}
-                      <h6 class="ml-4">{{grandchildlink.url}}</h6>
+                <div id="child_link{{child_link.pk}}" class="card-collapse collapse mb-2">
+                  {% for grandchild_link in grandchild_links %}
+                    {% if grandchild_link.child_link_id == child_link.pk %}
+                      <h6 class="ml-4">{{grandchild_link.url}}</h6>
                     {% endif %}
                   {% endfor %}
                 </div>

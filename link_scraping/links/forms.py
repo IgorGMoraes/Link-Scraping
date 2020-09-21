@@ -13,7 +13,8 @@ class LinkForm(forms.ModelForm):
         fields = ['url']
 
         widgets = {
-            'url': forms.TextInput(attrs = {'class': 'form-control mr-2 w-50', 'placeholder': 'URL'})
+            'url': forms.TextInput(attrs = {'class': 'form-control mr-2 w-50',
+                                            'placeholder': 'example: "https://www.site.com", "site.com"'})
         }
 
     def clean_url(self, *args, **kwargs):

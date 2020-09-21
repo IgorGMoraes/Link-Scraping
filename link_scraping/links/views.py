@@ -20,15 +20,15 @@ def home(request):
             messages.warning(request,'Please, provide a valid URL')
             return redirect('/')
 
-    parentlinks = ParentLink.objects.all()
-    childlinks = ChildLink.objects.all()
-    grandchildlinks = GrandchildLink.objects.all()
-
+    parent_links = ParentLink.objects.all()
+    child_links = ChildLink.objects.all()
+    grandchild_links = GrandchildLink.objects.all()
+     
     context = {
         'form': form,
-        'parentlinks': parentlinks,
-        'childlinks': childlinks,
-        'grandchildlinks': grandchildlinks
+        'parent_links': parent_links,
+        'child_links': child_links,
+        'grandchild_links': grandchild_links
     }
 
     return render(request, 'index.html', context)
