@@ -54,9 +54,9 @@
                   </h5>
                 {% endif %}
               
-                <div id="childlink{{childlink.pk}}" class="card-collapse collapse">
+                <div id="childlink{{childlink.pk}}" class="card-collapse collapse mb-2">
                   {% for grandchildlink in grandchildlinks %}
-                    {% if grandchildlink.parent_link_id == childlink.pk %}
+                    {% if grandchildlink.child_link_id == childlink.pk %}
                       <h6 class="ml-4">{{grandchildlink.url}}</h6>
                     {% endif %}
                   {% endfor %}

@@ -1,37 +1,35 @@
+import re
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
-import re
 from .models import ParentLink, ChildLink, GrandchildLink
 
-def find_and_save_links(ParentLink):
-    parent_link = ParentLink
+def find_and_save_links(parent_link = ParentLink):
     option = Options()
     option.headless = False
     browser = webdriver.Firefox(options=option)
 
-    def find_links(url, is_browser_init):
+    def find_urls(url):
         browser.get(url)
         soup = BeautifulSoup(browser.page_source, 'html.parser')
 
-        links = {link['href'] for link in soup.select('a[href]')}
-        links = list(filter(lambda link: "#" not in link, links))
+        hrefs = {href['href'] for href in soup.select('a[href]')}
+        hrefs = list(filter(lambda href: href.startswith(('http', '../', '/')), hrefs))
 
-        for i, link in enumerate(links):
-            if link.startswith('/'):
-                links[i] = url+link
+        for i, href in enumerate(hrefs):
+            if href.startswith('/'):
+                hrefs[i] = re.sub('//', '/', (url+href)[::-1], 1)[::-1]
+            if href.startswith('../'):
+                hrefs[i] = re.sub('\/?.*?\/', '', url[::-1])[::-1]+re.sub('^(..)', '', href)
+        return hrefs
 
-        return links
 
-
-    def save_child_links(ParentLink):
-        for link in find_links(ParentLink.url, True):
-            child_link = ChildLink.objects.create(id=None, parent_link=ParentLink, url=link)
-            child_link.save()
-            print('\n\n')
-            for link in find_links(child_link.url, False):
-                grandchild_link = GrandchildLink.objects.create(id=None, parent_link=child_link, url=link)
-                grandchild_link.save()
+    def save_child_links(parent_link):
+        parent_link.save()
+        for child_url in find_urls(parent_link.url):
+            child_link = ChildLink.objects.create(id=None, parent_link=parent_link, url=child_url)
+            for grandchild_url in find_urls(child_link.url):
+                GrandchildLink.objects.create(id=None, child_link=child_link, url=grandchild_url)
         browser.quit()
 
     save_child_links(parent_link)

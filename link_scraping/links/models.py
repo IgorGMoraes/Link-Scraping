@@ -17,7 +17,7 @@ class ChildLink(models.Model):
         return self.url
 
 class GrandchildLink(models.Model):
-    parent_link = models.ForeignKey(ChildLink, on_delete=models.CASCADE)
+    child_link = models.ForeignKey(ChildLink, on_delete=models.CASCADE)
     url = models.CharField(max_length=300)
 
     def __str__(self):
