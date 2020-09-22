@@ -75,12 +75,18 @@
   </div>
   <script>
     function loading(){
-      setTimeout(() =>{
-        if (document.readyState == "loading") {
-          document.getElementById('lds-wrapper').style.display= "flex";
-        }
-      },500)
+      setTimeout(() => {
+        const loader = document.querySelector("#lds-wrapper");
+        console.log('ok')
+        loader.className = "display";
+      }, 500)
     }
+
+    window.addEventListener("load", function () {
+      const loader = document.querySelector("#lds-wrapper");
+      console.log('ok')
+      loader.className = "hidden";
+    });
   </script>
 </body>
 </html>

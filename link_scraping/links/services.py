@@ -7,10 +7,8 @@ from selenium.common.exceptions import WebDriverException
 
 def find_and_save_links(parent_link = ParentLink):
     option = Options()
-    option.headless = False
-    capabilities = {
-        'browserName': 'firefox'
-    }
+    option.headless = True
+    capabilities = {'browserName': 'firefox'}
     try:
         browser = webdriver.Remote(desired_capabilities=capabilities, command_executor='http://selenium:4444/wd/hub')
     except:

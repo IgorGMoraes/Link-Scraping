@@ -6,10 +6,10 @@
   left: 0;
   background-color: #fff;
   opacity: .7;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .lds-default {
@@ -94,4 +94,28 @@
       transform: scale(1.5);
     }
   }
+
+  .display{
+    animation: fadeIn 1s;
+    animation-fill-mode: forwards;
+  }
+
+  .hidden {
+    animation: fadeOut 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  100% {
+    
+      visibility: visible;
+  }
+}
+
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
   
