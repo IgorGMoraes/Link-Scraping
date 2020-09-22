@@ -1,13 +1,20 @@
-import re
+import re, os
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
 from .models import ParentLink, ChildLink, GrandchildLink
+from selenium.common.exceptions import WebDriverException
 
 def find_and_save_links(parent_link = ParentLink):
     option = Options()
     option.headless = False
-    browser = webdriver.Firefox(options=option)
+    capabilities = {
+        'browserName': 'firefox'
+    }
+    try:
+        browser = webdriver.Remote(desired_capabilities=capabilities, command_executor='http://selenium:4444/wd/hub')
+    except:
+        browser = webdriver.Firefox(options=option)
 
     def find_urls(url):
         browser.get(url)
@@ -32,5 +39,7 @@ def find_and_save_links(parent_link = ParentLink):
                 GrandchildLink.objects.create(id=None, child_link=child_link, url=grandchild_url)
         browser.quit()
 
-    save_child_links(parent_link)
-    browser.quit()
+    try:
+        save_child_links(parent_link)
+    except:
+        browser.quit()
