@@ -1,6 +1,12 @@
 version: '3'
 
 services: 
+  selenium:
+    container_name: selenium
+    environment: 
+      - START_XFVB=false
+    image: selenium/standalone-firefox
+  
   linkscraping:
     build: .
     ports: 
@@ -8,5 +14,5 @@ services:
     volumes: 
       - .:/usr/local/src/linkscraping
     command: >
-      sh -c 'python manage.py runserver 0.0.0.0:8000'
+      sh -c 'python link_scraping/manage.py runserver 0.0.0.0:8000'
       
