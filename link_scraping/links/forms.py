@@ -1,7 +1,7 @@
+import re, requests
+from .services import format_url
 from django import forms
 from django.core.validators import URLValidator, ValidationError
-import re
-import requests
 from requests.exceptions import ConnectionError
 
 
@@ -17,15 +17,14 @@ class LinkForm(forms.ModelForm):
                                             'placeholder': 'example: "https://www.site.com", "site.com"'})
         }
 
+
     def clean_url(self, *args, **kwargs):
         url = self.cleaned_data.get('url')
-
-        if not re.match('https?://', url):
-            url = 'https://'+url
-
+        format_url(url)
         validator = URLValidator()
+
         try:
-            validator(url)   
+            validator(url)
         except ValidationError:
             print("URL not valid.")
             return

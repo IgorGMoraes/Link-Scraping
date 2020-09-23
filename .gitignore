@@ -2,3 +2,4 @@
 link_scraping/links/geckodriver.log
 link_scraping/links/forms.py
 geckodriver.log
+*.pyc
