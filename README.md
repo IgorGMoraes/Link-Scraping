@@ -17,6 +17,11 @@ pip install pipenv
 ```
 <br>
 
+-  Download geckodriver and paste it into the python root folder
+https://github.com/mozilla/geckodriver/releases <br>
+*This step is not necessary if you run in docker*
+<br>
+
 -  Install depencencies
 ```
 pipenv install --system --deploy
