@@ -1,4 +1,4 @@
-# Link Scraping [WIP]
+# Link Scraping
 
 Link Scraping is a web application developed in Python where users can provide an URL and the application will find all the links inside this URL and then, all links inside the newly found links.
 
@@ -49,7 +49,7 @@ docker-compose stop
 docker-compose down
 ```
 
-### Accessing the application
+### Access the application
 ```
-localhost:8000
+http://localhost:8000
 ```
